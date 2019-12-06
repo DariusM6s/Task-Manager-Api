@@ -1,11 +1,19 @@
 {
-	"name": "Task-Manager",
+	"name": "task-manager",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
 		"start": "node src/index.js",
-		"dev": "env-cmd ./config/dev.env nodemon src/index.js"
+		"dev": "nodemon -r dotenv/config src/index.js dotenv_config_path='./config/dev.env'",
+		"test": "jest --setupFiles dotenv/config --watch --runInBand"
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"setupFilesAfterEnv": [
+			"<rootDir>/tests/dotenv-config.js"
+		],
+		"verbose": true
 	},
 	"keywords": [],
 	"author": "",
@@ -22,7 +30,9 @@
 		"validator": "^12.1.0"
 	},
 	"devDependencies": {
-		"env-cmd": "^8.0.2",
-		"nodemon": "^2.0.1"
+		"dotenv": "^8.2.0",
+		"jest": "^24.9.0",
+		"nodemon": "^2.0.1",
+		"supertest": "^4.0.2"
 	}
 }
